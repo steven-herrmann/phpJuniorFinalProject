@@ -1,6 +1,7 @@
 <?php
 namespace JProjFinal;
 
+// Load composer autoloader
 if (!file_exists('vendor/autoload.php'))
     die ('Composer has not been installed');
 require 'vendor/autoload.php';
@@ -19,3 +20,6 @@ function autoloader ($fullPath)
 
     require $path;
 }
+
+// Load global items
+require 'Includes/connect.php';
