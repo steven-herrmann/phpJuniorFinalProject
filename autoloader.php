@@ -1,0 +1,17 @@
+<?php
+namespace JProjFinal;
+
+spl_autoload_register("\JProjFinal\autoloader");
+
+function autoloader ($fullPath)
+{
+    $nsl = strlen(__NAMESPACE__);
+    $classPath = trim(substr($fullPath, $nsl), '\\');
+
+    if (substr($fullPath, 0, $nsl) != __NAMESPACE__) return;
+
+    $parts = explode('\\', $classPath);
+    $path = implode('/', $parts) . '.php';
+
+    require $path;
+}
