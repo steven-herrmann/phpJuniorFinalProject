@@ -10,6 +10,4 @@ class Configuration
 
     const mysql_hostname = "localhost";
     const mysql_database = "";
-
-    
 }

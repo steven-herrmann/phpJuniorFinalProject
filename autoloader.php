@@ -1,6 +1,10 @@
 <?php
 namespace JProjFinal;
 
+if (!file_exists('vendor/autoload.php'))
+    die ('Composer has not been installed');
+require 'vendor/autoload.php';
+
 spl_autoload_register("\JProjFinal\autoloader");
 
 function autoloader ($fullPath)
