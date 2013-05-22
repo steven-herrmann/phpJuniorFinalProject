@@ -14,7 +14,6 @@ try
         ),
         'flags'    => MYSQLI_CLIENT_COMPRESS,
     ));
-    echo 'OK';
 
 }
 catch (DibiException $e)
