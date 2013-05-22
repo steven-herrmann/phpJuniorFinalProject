@@ -18,7 +18,7 @@ if ($queryStart !== false)
 if (empty($path))
     Views::render('index');
 
-if (!preg_match('/^[a-z\/]+$/', $includePath))
+if (!preg_match('/^[a-z\/]+$/i', $path))
     Views::render('404');
 
 if (!Views::exists($path))
