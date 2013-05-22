@@ -23,3 +23,4 @@ function autoloader ($fullPath)
 
 // Load global items
 require 'Includes/connect.php';
+require 'constants.php';
