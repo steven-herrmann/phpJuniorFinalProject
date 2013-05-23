@@ -11,7 +11,6 @@ class Views
     static function render ($page, $vars=array())
     {
         self::renderPart($page, $vars);
-        exit;
     }
 
     static function renderPart ($page, $vars=array())
@@ -29,6 +28,6 @@ class Views
 
     private static function getViewPath ($page)
     {
-        return realpath(PAGEPATH . "/$page.php");
+        return realpath(VIEW_PATH . "/$page.php");
     }
 }

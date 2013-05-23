@@ -1,6 +1,8 @@
 <?php
 namespace JProjFinal;
 
+require 'constants.php';
+
 // Load composer autoloader
 if (!file_exists('vendor/autoload.php'))
     die ('Composer has not been installed');
@@ -18,9 +20,8 @@ function autoloader ($fullPath)
     $parts = explode('\\', $classPath);
     $path = implode('/', $parts) . '.php';
 
-    require $path;
+    require ABSPATH . '/' . $path;
 }
 
 // Load global items
 require 'Includes/connect.php';
-require 'constants.php';
