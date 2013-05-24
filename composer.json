@@ -1,5 +1,6 @@
 {
     "require": {
-        "dg/dibi": "dev-master"
+        "dg/dibi": "dev-master",
+        "bkcore/nocsrf": "dev-master"
     }
 }
