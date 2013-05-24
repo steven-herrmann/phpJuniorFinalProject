@@ -19,3 +19,4 @@
             <?php Views::renderPart('template/navigation'); ?>
         </div>
         <div class="content">
+            <?php displayFlashMessage(); ?>
