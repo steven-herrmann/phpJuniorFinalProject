@@ -48,6 +48,11 @@ if (isset($_POST))
         else if (strlen($address) > 50)
             $errors['address'][] = 'Address is too long.';
     }
+    
+    //Route
+    if(!isset($_POST['route']))
+        $errors['route'][] = 'Route is required';
+    
 }
 
 // Get routes
