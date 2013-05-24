@@ -118,7 +118,6 @@ CREATE TABLE IF NOT EXISTS `truck` (
 -- Constraints for table `client`
 --
 ALTER TABLE `client`
-  ADD CONSTRAINT `client_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `route` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `client_ibfk_2` FOREIGN KEY (`RouteID`) REFERENCES `route` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
