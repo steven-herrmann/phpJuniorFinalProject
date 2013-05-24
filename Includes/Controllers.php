@@ -4,17 +4,15 @@ use JProjFinal\Configuration;
 
 class Controllers
 {
-    private static $controller;
-
     static function route ($path)
     {
         $parts = explode('/', $path);
 
-        $controller = isset($parts[0]) && !empty($parts[0]) ? $parts[0] : Configuration::defaultController;
+        $controller = isset($parts[0]) && !empty($parts[0]) ? ucfirst($parts[0]) : Configuration::defaultController;
         $method     = isset($parts[1]) && !empty($parts[0]) ? $parts[1] : 'index';
 
         if (!self::controllerExists($controller))
-            self::runController(Configuration::defaultController, '404');
+            self::runController(Configuration::defaultController, '_404');
         
         self::runController($controller, $method);
     }

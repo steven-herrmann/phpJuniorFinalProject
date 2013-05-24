@@ -3,12 +3,8 @@
 <?php Views::renderPart('template/header'); ?>
 
 
-<h1>Re: Administrate</h1>
-<p>Use these tools to do things!</p>
+<h1>Re: 404</h1>
 
-<?php
-$row = dibi::fetch('SELECT * FROM client');
-var_dump($row);
-?>
+<div class="frowny">:(</div>
 
 <?php Views::renderPart('template/footer'); ?>
