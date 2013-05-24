@@ -53,6 +53,15 @@ if (isset($_POST))
     if(!isset($_POST['route']))
         $errors['route'][] = 'Route is required';
     
+    $arr = array(
+        'id' => 'null' ,
+        'FirstName' => $firstname,
+        'LastName' => $lastname,
+        'Address' => $address,
+        'Route' => $route
+    )
+    
+    dibi::query("INSERT INTO employee", )
 }
 
 // Get routes
