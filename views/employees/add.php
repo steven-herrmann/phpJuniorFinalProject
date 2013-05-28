@@ -59,8 +59,13 @@ if (isset($_POST))
     if(isset($_POST['manager']))
     {
         /*Need to select from a the employees table
+        $manager = $_POST['manager']
         $query = dibi::('SELECT * employees WHERE position = 'Manager')
         */
+    }
+    else
+    {
+        $manager = null;
     }
     
     $errorMsgs = array();
@@ -70,8 +75,16 @@ if (isset($_POST))
     if(count($errorMsgs == 0))
     {
         $items = array('FirstName'=>$firstname, 'LastName' => $lastname, 'Position' => $position, 'Salary' => $salary);
-        
+        $result = dibi::query('INSERT INTO employees',$items);
+        if($result)
+        {
+            echo 'Employee Added.';
+            flashMessage('employees/add', 'Employee Added.');
+        }
+        else
+            echo 'Error adding employee';
     }
+    
 }
 
 $posArr = array(
@@ -92,10 +105,15 @@ $posArr = array(
     <label class="form-required">Firstname:
     <input type="text" class="first-name" name="first-name" required />
     </label>
+    <?php if (($msg = av($errorMsgs, 'firstname', false, false)) !== false) : ?>
+        <p><?php echo htmlspecialchars($msg); ?></p>
+    <?php endif;?>
 
     <label class="form-required">Lastname:
     <input type="text" class="last-name" name="last-name" required />
     </label>
+    <?php if(($msg = av($errorMsgs, 'lastname',false,false))!== false) : ?>
+        <p><?php echo htmlspecialchars?></p>
 
     <label class="form-required">Position:
         <select name="position" class="posiiton">
