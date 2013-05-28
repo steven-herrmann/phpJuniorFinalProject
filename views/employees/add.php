@@ -42,6 +42,10 @@
         <input type="text" class="manager" name="manager" />
     </label>
     
+    <label>Passenger:
+        <input type="text" class="passenger" name="passenger"/>
+    </label>
+    
     <input name="submit" class="button form-button" type="submit" value="Submit" />
     <input name="reset" class="button form-button" type="reset" value="Clear" />
 </form>
