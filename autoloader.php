@@ -14,11 +14,12 @@ function autoloader ($fullPath)
 {
     $nsl = strlen(__NAMESPACE__);
     $classPath = trim(substr($fullPath, $nsl), '\\');
+
     $classPath = ucfirst($classPath);
 
     if (substr($fullPath, 0, $nsl) != __NAMESPACE__) return;
-
     $parts = explode('\\', $classPath);
+
     array_walk($parts, function ($val) { return ucfirst($val); });
     $path = implode('/', $parts) . '.php';
 
