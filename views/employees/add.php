@@ -9,6 +9,11 @@
 if (isset($_POST))
 {    
     $errors = array();
+    
+    //CSRF
+    if(!\NoCSRF::check('addEmployee',$_POST,false,60*10, false, true))
+        $errors['form'][] = "Error submitting, please try again";
+    
 
     // Firstname
     if (!isset($_POST['firstname']))
@@ -48,6 +53,24 @@ if (isset($_POST))
         $salary = $_POST['salary'];
         $replaceArr = array("$",",");
         $salary = str_replace();
+    }
+    
+    //Manager
+    if(isset($_POST['manager']))
+    {
+        /*Need to select from a the employees table
+        $query = dibi::('SELECT * employees WHERE position = 'Manager')
+        */
+    }
+    
+    $errorMsgs = array();
+    foreach ($errors as $name => $errorList)
+        $errorMsgs[$name] = implode('  ', $errorList);
+    
+    if(count($errorMsgs == 0))
+    {
+        $items = array('FirstName'=>$firstname, 'LastName' => $lastname, 'Position' => $position, 'Salary' => $salary);
+        
     }
 }
 
