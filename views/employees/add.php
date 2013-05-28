@@ -7,10 +7,7 @@
 
 <?php
 if (isset($_POST))
-{
-    // Address
-    // Route
-    
+{    
     $errors = array();
 
     // Firstname
@@ -61,7 +58,7 @@ $posArr = array(
     "Clerk",
     "Cashier",
     "Sorter"
-    )
+    );
 // Get routes
 ?>
 
