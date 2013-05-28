@@ -6,48 +6,64 @@
 <h1>Re: Add Employee</h1>
 
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-    <input type="hidden" name="_nonce" value="<?php \NoCSRF::generate('addEmployee'); ?>" />
+<?php av($errorMsgs, 'form'); ?>
+<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
+    <input type="hidden" name="addEmployee_nonce" value="<?php echo \NoCSRF::generate('addEmployee_nonce'); ?>" />
 
     <label class="form-required">Firstname:
-    <input type="text" class="first-name" name="first-name" required />
+    <input type="text" class="firstname" name="firstname" required />
     </label>
     <?php if (($msg = av($errorMsgs, 'firstname', false, false)) !== false) : ?>
         <p><?php echo htmlspecialchars($msg); ?></p>
     <?php endif;?>
 
     <label class="form-required">Lastname:
-    <input type="text" class="last-name" name="last-name" required />
+    <input type="text" class="lastname" name="lastname" required />
     </label>
-    <?php if(($msg = av($errorMsgs, 'lastname',false,false))!== false) : ?>
-        <p><?php echo htmlspecialchars?></p>
+    <?php if(($msg = av($errorMsgs, 'lastname', false, false)) !== false) : ?>
+        <p><?php echo htmlspecialchars($msg); ?></p>
+    <?php endif;?>
 
     <label class="form-required">Position:
-        <select name="position" class="posiiton">
-            <?php if (count($posArr) > 0) : ?>
-                <?php for($i; $i < count($posArr); $i++):?>
-                    <option value="<?php echo $posArr[$i]; ?>"><?php htmlspecialchars($posArr[$i]); ?></option>
-                <?php endfor; ?>
+        <select name="position" class="position">
+            <?php if (count($positions) > 0) : ?>
+                <?php foreach($positions as $position):?>
+                    <option value="<?php echo htmlspecialchars($position); ?>"><?php echo htmlspecialchars($position); ?></option>
+                <?php endforeach; ?>
             <?php else: ?>
                 <option>No positions to choose from.</option>
             <?php endif; ?>
         </select>
     </label>
+    <?php if(($msg = av($errorMsgs, 'position', false, false)) !== false) : ?>
+        <p><?php echo htmlspecialchars($msg); ?></p>
+    <?php endif;?>
     
     <label class="form-required">Salary:
         <input type="text" class="salary" name="salary" required/>
     </label>
-    
+    <?php if(($msg = av($errorMsgs, 'salary', false, false)) !== false) : ?>
+        <p><?php echo htmlspecialchars($msg); ?></p>
+    <?php endif;?>
+
     <label>Manager:
-        <input type="text" class="manager" name="manager" />
+        <select name="manager">
+            <?php if (count($employees) > 0) : ?>
+                <?php foreach ($employees as $employee) : ?>
+                    <?php $selected = av($_POST, 'employee', '', false) == $employee->ID ? ' selected':''; ?>
+                    <option value="<?php echo $employee->ID; ?>"<?php echo $selected; ?>><?php echo htmlspecialchars($employee->FirstName . ' ' . $employee->LastName); ?></option>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <option>No Employees to choose from.</option>
+            <?php endif; ?>
+        </select>
     </label>
+    <?php if(($msg = av($errorMsgs, 'manager', false, false)) !== false) : ?>
+        <p><?php echo htmlspecialchars($msg); ?></p>
+    <?php endif;?>
     
     <input name="submit" class="button form-button" type="submit" value="Submit" />
     <input name="reset" class="button form-button" type="reset" value="Clear" />
 </form>
-
-<?php
-$result = dibi::fetchAll('SELECT *, manager.FirstName as ManagerFirstName, manager.LastName as ManagerLastName FROM employee RIGHT JOIN employee as manager ON manager.ID = employee.ManagerID');
-?>
 
 <?php Views::renderPart('template/footer'); ?>

@@ -1,9 +1,12 @@
 <?php
 namespace JProjFinal\Controllers;
 use JProjFinal\Includes\Views;
+use JProjFinal\Models\Employees as EmployeesModel;
 
 class Employees
 {
+    private $positions = array('Janitor','Salesman', 'Manager', 'CEO');
+
     function index ()
     {
         Views::render('employees/list');
@@ -11,7 +14,17 @@ class Employees
 
     function add ()
     {
-        Views::render('employees/add');
+        if (isset($_POST['submit']))
+        {
+            $insertResult = $this->insert();
+
+            if ($insertResult === true)
+                flashMessage('employees/add', 'Client Added.');
+        }
+        else
+            $insertResult = array();
+
+        Views::render('employees/add', array('employees'=>EmployeesModel::getAll(), 'errorMsgs'=>$insertResult, 'positions'=>$this->positions));
     }
 
     private function insert ()
@@ -21,7 +34,7 @@ class Employees
         $errors = array();
 
         // CSRF
-        if (!\NoCSRF::check('addclient_nonce', $_POST, false, 60 * 10, false, true))
+        if (!\NoCSRF::check('addEmployee_nonce', $_POST, false, 60 * 10, false, true))
             $errors['form'][] = 'Error submitting, please try again.';
 
         // Firstname
@@ -50,29 +63,42 @@ class Employees
                 $errors['lastname'][] = 'Lastname is too long.';
         }
 
-        // Address
-        $address = null;
-        if (!isset($_POST['address']))
-            $errors['address'][] = 'Address is required.';
+        // Position
+        $position = null;
+        if (!isset($_POST['position']))
+            $errors['position'][] = 'Address is required.';
         else
         {
-            $address = $_POST['address'];
-            if (strlen($address) == 0)
-                $errors['address'][] = 'Address cannot be empty.';
-            else if (strlen($address) > 50)
-                $errors['address'][] = 'Address is too long.';
+            $position = $_POST['position'];
+            if (!in_array($position, $this->positions))
+                $errors['position'][] = 'Invalid position type.';
+        }
+
+        // Salary
+        $salary = null;
+        if (!isset($_POST['salary']))
+            $errors['salary'][] = 'Address is required.';
+        else
+        {
+            $salary = $_POST['salary'];
+            $salary = ltrim($salary, '$');
+
+            if (!is_numeric($salary))
+                $errors['salary'][] = 'Salary must be a number.';
+            else if (strlen($salary) == 0)
+                $errors['salary'][] = 'Salary cannot be empty.';
         }
 
 
-        // Route
-        $route = null;
-        if (isset($_POST['route']))
+        // Manager
+        $manager = null;
+        if (isset($_POST['manager']))
         {
             // If the route actually exists
-            foreach (Routes::getRoutes() as $r)
+            foreach (EmployeesModel::getAll() as $employee)
             {
-                if ($r->ID == $_POST['route'])
-                    $route = $r->ID;
+                if ($employee->ID == $_POST['manager'])
+                    $manager = $employee->ID;
             }
         }
 
@@ -83,8 +109,8 @@ class Employees
 
         if (count($errorMsgs) == 0)
         {
-            $items = array('FirstName'=>$firstname, 'LastName'=>$lastname, 'Address'=>$address, 'RouteID'=>$route);
-            $result = dibi::query('INSERT INTO client', $items);
+            $items = array('FirstName'=>$firstname, 'LastName'=>$lastname, 'Position'=>$position, 'Salary'=>$salary, 'ManagerID'=>$manager);
+            $result = \dibi::query('INSERT INTO employee', $items);
 
             return ($result) ? true : array();
         }

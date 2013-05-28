@@ -12,7 +12,6 @@ class Clients
 
     function add ()
     {
-
         if (isset($_POST['submit']))
         {
             $insertResult = $this->insert();
