@@ -6,50 +6,48 @@
 <h1>Re: Add Employee</h1>
 
 
-<?php av($errorMsgs, 'form'); ?>
-<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
-    <input type="hidden" name="addclient_nonce" value="<?php echo \NoCSRF::generate('addclient_nonce'); ?>" />
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+    <input type="hidden" name="_nonce" value="<?php \NoCSRF::generate('addEmployee'); ?>" />
 
     <label class="form-required">Firstname:
-    <input type="text" class="first-name" name="firstname" value="<?php av($_POST, 'firstname'); ?>" required />
+    <input type="text" class="first-name" name="first-name" required />
     </label>
     <?php if (($msg = av($errorMsgs, 'firstname', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
-    <?php endif; ?>
+        <p><?php echo htmlspecialchars($msg); ?></p>
+    <?php endif;?>
 
     <label class="form-required">Lastname:
-    <input type="text" class="last-name" name="lastname" value="<?php av($_POST, 'lastname'); ?>" required />
+    <input type="text" class="last-name" name="last-name" required />
     </label>
-    <?php if (($msg = av($errorMsgs, 'lastname', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
-    <?php endif; ?>
+    <?php if(($msg = av($errorMsgs, 'lastname',false,false))!== false) : ?>
+        <p><?php echo htmlspecialchars?></p>
 
-    <label class="form-required">Address:
-    <input type="text" class="address" name="address" value="<?php av($_POST, 'address'); ?>" required />
-    </label>
-    <?php if (($msg = av($errorMsgs, 'address', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
-    <?php endif; ?>
-
-    <label>Route:
-        <select name="route" class="route">
-            <?php if (count($routes) > 0) : ?>
-                <?php foreach ($routes as $route) : ?>
-                    <?php $selected = av($_POST, 'route', '', false) == $route->ID ? ' selected':''; ?>
-                    <option value="<?php echo $route->ID; ?>"<?php echo $selected; ?>><?php htmlspecialchars($route->RouteName); ?></option>
-                <?php endforeach; ?>
+    <label class="form-required">Position:
+        <select name="position" class="posiiton">
+            <?php if (count($posArr) > 0) : ?>
+                <?php for($i; $i < count($posArr); $i++):?>
+                    <option value="<?php echo $posArr[$i]; ?>"><?php htmlspecialchars($posArr[$i]); ?></option>
+                <?php endfor; ?>
             <?php else: ?>
-                <option>No Routes to choose from.</option>
+                <option>No positions to choose from.</option>
             <?php endif; ?>
         </select>
     </label>
-    <?php if (($msg = av($errorMsgs, 'route', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
-    <?php endif; ?>
-
-
+    
+    <label class="form-required">Salary:
+        <input type="text" class="salary" name="salary" required/>
+    </label>
+    
+    <label>Manager:
+        <input type="text" class="manager" name="manager" />
+    </label>
+    
     <input name="submit" class="button form-button" type="submit" value="Submit" />
     <input name="reset" class="button form-button" type="reset" value="Clear" />
 </form>
+
+<?php
+$result = dibi::fetchAll('SELECT *, manager.FirstName as ManagerFirstName, manager.LastName as ManagerLastName FROM employee RIGHT JOIN employee as manager ON manager.ID = employee.ManagerID');
+?>
 
 <?php Views::renderPart('template/footer'); ?>
