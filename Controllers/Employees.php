@@ -26,6 +26,18 @@ class Employees
 
         Views::render('employees/add', array('employees'=>EmployeesModel::getAll(), 'errorMsgs'=>$insertResult, 'positions'=>$this->positions));
     }
+    function delete()
+    {
+        if(isset($_GET['ID']) && isset($_GET['deleteEmployee_token']))
+        {
+            if($_GET['deleteEmployee_token'] == \NoCSRF::generate('deleteEmployee_token'))
+            {
+                $result = dibi::query("DELETE FROM employee WHERE id = ".$_GET['id']." LIMIT 1");
+                    if($result)
+                        flashMessage('employees/delete', 'Employee Deleted');
+            }
+        }
+    }
 
     private function insert ()
     {
