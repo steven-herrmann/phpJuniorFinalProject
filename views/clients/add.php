@@ -12,24 +12,27 @@
 
     <label class="form-required">Firstname:
     <input type="text" class="first-name" name="firstname" value="<?php av($_POST, 'firstname'); ?>" required />
-    </label>
     <?php if (($msg = av($errorMsgs, 'firstname', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif; ?>
+    </label>
+
 
     <label class="form-required">Lastname:
     <input type="text" class="last-name" name="lastname" value="<?php av($_POST, 'lastname'); ?>" required />
-    </label>
     <?php if (($msg = av($errorMsgs, 'lastname', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif; ?>
+    </label>
+
 
     <label class="form-required">Address:
     <input type="text" class="address" name="address" value="<?php av($_POST, 'address'); ?>" required />
-    </label>
-    <?php if (($msg = av($errorMsgs, 'address', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
+   <?php if (($msg = av($errorMsgs, 'address', false, false)) !== false) : ?>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif; ?>
+    </label>
+ 
 
     <label>Route:
         <select name="route" class="route">
@@ -42,10 +45,11 @@
                 <option>No Routes to choose from.</option>
             <?php endif; ?>
         </select>
-    </label>
     <?php if (($msg = av($errorMsgs, 'route', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif; ?>
+    </label>
+
 
 
     <input name="submit" class="button form-button" type="submit" value="Submit" />

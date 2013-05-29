@@ -28,6 +28,7 @@ foreach ($result as $row)
         <?php else: ?>
             <td>No Manager</td>
         <?php endif; ?>
+        <td><a href="<?php siteUrl('employees/delete'); ?>?id=<?php echo $row->ID; ?>"
     </tr>
     <?php
 }

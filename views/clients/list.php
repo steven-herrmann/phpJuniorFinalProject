@@ -27,6 +27,8 @@ foreach ($result as $row)
         <?php else: ?>
             <td>No Route Assigned</td>
         <?php endif; ?>
+        <td><a href="<?php siteUrl('clients/delete'); ?>?id=<?php echo $row->ID; ?>&deleteClient_token=<?php echo \NoCSRF::generate("deleteClient_token"); ?>">
+        Delete</a></td>
     </tr>
     <?php
 }
