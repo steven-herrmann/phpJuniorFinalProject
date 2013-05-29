@@ -28,7 +28,8 @@ foreach ($result as $row)
         <?php else: ?>
             <td>No Manager</td>
         <?php endif; ?>
-        <td><a href="<?php siteUrl('employees/delete'); ?>?id=<?php echo $row->ID; ?>"
+        <td><a href="<?php siteUrl('employees/delete'); ?>?id=<?php echo $row->ID; ?>&deleteEmployee_token=<?php \NoCSRF::generate('deleteEmployee_token'); ?>">
+        Delete</a></td>
     </tr>
     <?php
 }
