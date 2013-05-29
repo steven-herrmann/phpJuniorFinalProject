@@ -12,17 +12,19 @@
 
     <label class="form-required">Firstname:
     <input type="text" class="firstname" name="firstname" required />
-    </label>
     <?php if (($msg = av($errorMsgs, 'firstname', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?></p>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif;?>
+    </label>
+ 
 
     <label class="form-required">Lastname:
     <input type="text" class="lastname" name="lastname" required />
-    </label>
     <?php if(($msg = av($errorMsgs, 'lastname', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?></p>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif;?>
+    </label>
+   
 
     <label class="form-required">Position:
         <select name="position" class="position">
@@ -34,17 +36,19 @@
                 <option>No positions to choose from.</option>
             <?php endif; ?>
         </select>
-    </label>
     <?php if(($msg = av($errorMsgs, 'position', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?></p>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif;?>
+    </label>
+
     
     <label class="form-required">Salary:
         <input type="text" class="salary" name="salary" required/>
-    </label>
-    <?php if(($msg = av($errorMsgs, 'salary', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?></p>
+   <?php if(($msg = av($errorMsgs, 'salary', false, false)) !== false) : ?>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif;?>
+    </label>
+ 
 
     <label>Manager:
         <select name="manager">
@@ -57,10 +61,11 @@
                 <option>No Employees to choose from.</option>
             <?php endif; ?>
         </select>
-    </label>
     <?php if(($msg = av($errorMsgs, 'manager', false, false)) !== false) : ?>
-        <p><?php echo htmlspecialchars($msg); ?></p>
+        <p class="inline-error"><?php echo htmlspecialchars($msg); ?></p>
     <?php endif;?>
+    </label>
+
     
     <input name="submit" class="button form-button" type="submit" value="Submit" />
     <input name="reset" class="button form-button" type="reset" value="Clear" />
