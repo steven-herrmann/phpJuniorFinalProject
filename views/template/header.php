@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Re: Wanting/Getting</title>
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo siteurl('ui/css/main.css'); ?>" />
 </head>
 <body>
     <header>
@@ -14,8 +14,8 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="side">
+    <div class="container page" id="page">
+        <div id="side" class="side">
             <?php Views::renderPart('template/navigation'); ?>
         </div>
         <div class="content">

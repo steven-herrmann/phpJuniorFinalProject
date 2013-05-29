@@ -4,7 +4,7 @@
 
 <h1>Re: Add Payment</h1>
 
-<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
+<form class="form" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
     <input type="hidden" name="addPayment_nonce" value="<?php echo \NoCSRF::generate('addPayment_nonce'); ?>" />
 
     <label class="form-required">Type:

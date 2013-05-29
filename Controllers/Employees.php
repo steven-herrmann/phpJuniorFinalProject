@@ -19,7 +19,7 @@ class Employees
             $insertResult = $this->insert();
 
             if ($insertResult === true)
-                flashMessage('employees/add', 'Client Added.');
+                flashMessage('employees/add', 'Employee Added.');
         }
         else
             $insertResult = array();

@@ -7,7 +7,7 @@
 
 
 <?php av($errorMsgs, 'form'); ?>
-<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
+<form class="form" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
     <input type="hidden" name="addclient_nonce" value="<?php echo \NoCSRF::generate('addclient_nonce'); ?>" />
 
     <label class="form-required">Firstname:
