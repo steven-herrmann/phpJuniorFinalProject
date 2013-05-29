@@ -24,6 +24,18 @@ class Clients
 
         Views::render('clients/add', array('errorMsgs'=>$insertResult, 'routes'=>Routes::getRoutes()));
     }
+    function delete()
+    {
+        if(isset($_GET['ID']) && isset($_GET['deleteClient_token']))
+        {
+            if(\NoCSRF::generate('deleteClient_token') == $_GET['deleteClient_token'])
+            {
+                $result = dibi::query("DELETE FROM client WHERE id = ".$_GET['id']." LIMIT 1");
+                    if($result)
+                        flashMessage('clients/delete', 'Client Deleted');
+            }
+        }
+    }
 
     private function insert ()
     {
